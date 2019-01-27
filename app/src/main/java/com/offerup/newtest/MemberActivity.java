@@ -28,7 +28,9 @@ public class MemberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
-
+        if(getActionBar()!=null){
+            getActionBar().setTitle("New Member User");
+        }
     }
 
 

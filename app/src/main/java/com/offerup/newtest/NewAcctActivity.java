@@ -37,36 +37,23 @@ import java.util.Map;
 
 public class NewAcctActivity extends AppCompatActivity {
 
-    EditText Name,Pass,email;
-
-    FirebaseAuth firebaseAuth;
+    private EditText Name,Pass,email;
+    private FirebaseAuth firebaseAuth;
+    private String userID;
 
 
 
    private DatabaseReference Database;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_acct);
-
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         Button Submit = (Button) findViewById(R.id.btnSubmit);
          Name = (EditText)findViewById(R.id.editTextName);
          Pass = (EditText)findViewById(R.id.editTextPass);
          email = (EditText)findViewById(R.id.editTextEmail);
-
-
-
-
-
-
-
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,57 +67,42 @@ public class NewAcctActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
 
                             Database = FirebaseDatabase.getInstance().getReference().push().child(Name.getText().toString());
-                            String UserID = firebaseAuth.getCurrentUser().getUid();
+                            userID = firebaseAuth.getCurrentUser().getUid();
                             Database.child("Profile").child("Email").setValue(email.getText().toString());
                             Database.child("Profile").child("Name").setValue(Name.getText().toString());
-                            Database.child("Profile").child("Password").setValue(Pass.getText().toString());
+                            Database.child("Profile").child("password").setValue(Pass.getText().toString());
 
-                            //Database.child("Password").setValue(Pass.getText().toString());
+                            //Database.child("password").setValue(Pass.getText().toString());
                             //Database.child("MemberName").setValue(Pass.getText().toString());
 
 
 
-                            //Database.push().getParent().child("Password").setValue(Pass.getText().toString());
+                            //Database.push().getParent().child("password").setValue(Pass.getText().toString());
                            // Database.child("Email").setValue(email.getText().toString());
                           //  Database.child("User").push().setValue(email.getText().toString());
                             //Database.child("Name").push().setValue(Name.getText().toString());
-                            //Database.child("Password").push().setValue(Pass.getText().toString());
-
-
+                            //Database.child("password").push().setValue(Pass.getText().toString());
                             Toast.makeText(NewAcctActivity.this, "Welcome " + Name.getText().toString(),
                                     Toast.LENGTH_LONG).show();
-
-
-
-
-
-                        }else {
-
-                            Toast.makeText(NewAcctActivity.this, "Not Valid Email Or Password, (6 Character Min for Password)",
-                                    Toast.LENGTH_LONG).show();
+                            openMemberActivity();
+                        }else if (Pass.length() < 6){
+                            Pass.setError("password is not valid, 6 Character Min for password");
+                        } else if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".com")){
+                            email.setError("Email is not valid");
+                        }else if(!task.isSuccessful()){
+                            Toast.makeText(getBaseContext(), email.getText().toString()+" already exists, try a different name" , Toast.LENGTH_SHORT).show();
 
                         }
-
-
-
-
-
                     }
                 });
-
-                openMemberActivity();
             }
 
         });
 
-
-
     } public void openMemberActivity(){
         Intent intent = new Intent(this, MemberActivity.class);
-
+        intent.putExtra("userId", userID);
         startActivity(intent);
-
-
     }
 
 

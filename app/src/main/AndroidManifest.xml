@@ -14,8 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MemberActivity"></activity>
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".MemberActivity">
+
+        </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:parentActivityName=".HomeActivity"
+            />
         <activity android:name=".NewAcctActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
