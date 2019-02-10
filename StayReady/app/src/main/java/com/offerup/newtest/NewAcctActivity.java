@@ -36,37 +36,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NewAcctActivity extends AppCompatActivity {
-
-    EditText Name,Pass,email;
+    String NUID;
+    EditText Name, Pass, email;
 
     FirebaseAuth firebaseAuth;
 
+    private FirebaseDatabase mFireDatabase;
+    private DatabaseReference myRef, myRef2;
 
 
-   private DatabaseReference Database;
 
-
-
+    private DatabaseReference Database, Database2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_acct);
-
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         Button Submit = (Button) findViewById(R.id.btnSubmit);
          Name = (EditText)findViewById(R.id.editTextName);
          Pass = (EditText)findViewById(R.id.editTextPass);
          email = (EditText)findViewById(R.id.editTextEmail);
-
-
-
-
-
-
-
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,58 +69,42 @@ public class NewAcctActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
 
-                            Database = FirebaseDatabase.getInstance().getReference().push().child(Name.getText().toString());
-                            String UserID = firebaseAuth.getCurrentUser().getUid();
-                            Database.child("Profile").child("Email").setValue(email.getText().toString());
-                            Database.child("Profile").child("Name").setValue(Name.getText().toString());
-                            Database.child("Profile").child("Password").setValue(Pass.getText().toString());
+                            NUID = firebaseAuth.getUid();
+                            mFireDatabase = FirebaseDatabase.getInstance();
+                            myRef = mFireDatabase.getReference().getRoot();
+                            myRef2 = myRef.child(NUID);
+                            myRef =  FirebaseDatabase.getInstance().getReference();
 
-                            //Database.child("Password").setValue(Pass.getText().toString());
-                            //Database.child("MemberName").setValue(Pass.getText().toString());
-
-
-
-                            //Database.push().getParent().child("Password").setValue(Pass.getText().toString());
-                           // Database.child("Email").setValue(email.getText().toString());
-                          //  Database.child("User").push().setValue(email.getText().toString());
-                            //Database.child("Name").push().setValue(Name.getText().toString());
-                            //Database.child("Password").push().setValue(Pass.getText().toString());
+                            myRef2.child("Email").setValue(email.getText().toString());
+                            myRef2.child("Name").setValue(Name.getText().toString());
+                            myRef2.child("Password").setValue(Pass.getText().toString());
 
 
-                            Toast.makeText(NewAcctActivity.this, "Welcome " + Name.getText().toString(),
+                            Toast.makeText(NewAcctActivity.this, "Welcome",
                                     Toast.LENGTH_LONG).show();
 
 
 
 
-
-                        }else {
-
-                            Toast.makeText(NewAcctActivity.this, "Not Valid Email Or Password, (6 Character Min for Password)",
-                                    Toast.LENGTH_LONG).show();
+                            openMemberActivity();
+                        }else if (Pass.length() < 6){
+                            Pass.setError("password is not valid, 6 Character Min for password");
+                        } else if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".com")){
+                            email.setError("Email is not valid");
+                        }else if(!task.isSuccessful()){
+                            Toast.makeText(getBaseContext(), email.getText().toString()+" already exists, try a different name" , Toast.LENGTH_SHORT).show();
 
                         }
-
-
-
-
-
                     }
                 });
-
-                openMemberActivity();
             }
 
         });
 
-
-
     } public void openMemberActivity(){
         Intent intent = new Intent(this, MemberActivity.class);
-
+        intent.putExtra("userId", NUID);
         startActivity(intent);
-
-
     }
 
 
