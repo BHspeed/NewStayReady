@@ -1,6 +1,7 @@
 package com.offerup.newtest;
 
 
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +40,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -58,15 +60,19 @@ import java.util.jar.Attributes;
 
 public class MemberActivity extends AppCompatActivity {
 
-    ToggleButton Membership;
-    String NUID;
-    CheckBox FightY, FightN;
-   static EditText Height, Weight;
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase mFireDatabase;
-    DatabaseReference myRef, myRef2;
-    TextView User, FightOr;;
-    ImageView websitelogo;
+    private ToggleButton Membership;
+    private String NUID;
+    private CheckBox FightY, FightN;
+    private static EditText Height, Weight;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase mFireDatabase;
+    private DatabaseReference myRef, myRef2;
+    private TextView User, FightOr;;
+    private ImageView websitelogo;
+    private ProgressBar xpProgressBar;
+    private TextView xpTextView;
+    private int currentProgress = 65;
+    private ImageView imageViewLogo;
 
 
 
@@ -97,7 +103,31 @@ public class MemberActivity extends AppCompatActivity {
         websitelogo = (ImageView) findViewById(R.id.imageView7);
 
         Weight = findViewById(R.id.editTextWeight);
+        Weight.setError("Make sure to enter your weight, i.e: 187lbs");
+
         Height = findViewById(R.id.editTextHeight);
+        Height.setError("Make sure to enter your height, i.e: 5'7");
+
+
+        xpProgressBar = findViewById(R.id.xPProgressBar);
+        xpProgressBar.setMax(100);
+        xpProgressBar.setProgress(currentProgress);
+
+        xpTextView = findViewById(R.id.xPTextView);
+        xpTextView.setText(currentProgress +"/100");
+
+        final ImagePopup imagePopup = new ImagePopup(this);
+
+        imageViewLogo = findViewById(R.id.imageViewLogo);
+        imagePopup.initiatePopup(imageViewLogo.getDrawable());
+        imageViewLogo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                imagePopup.viewPopup();
+                return true;
+            }
+        });
+
 
         FightN.setVisibility(findViewById(R.id.checkBoxFightN).INVISIBLE);
         FightY.setVisibility(findViewById(R.id.checkBoxFightY).INVISIBLE);
