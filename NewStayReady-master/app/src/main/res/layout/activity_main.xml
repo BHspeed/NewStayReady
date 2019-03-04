@@ -22,6 +22,7 @@
 
     <ProgressBar
         android:id="@+id/progress_circular"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="88dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
