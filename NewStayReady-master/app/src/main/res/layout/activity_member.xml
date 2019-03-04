@@ -9,15 +9,17 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="439dp"
+
         android:layout_height="84dp"
+
         android:layout_marginEnd="8dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.388"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/editTextWeight"
@@ -103,7 +105,9 @@
         android:layout_marginEnd="8dp"
         android:text="TextView"
         android:hint=""
+
         android:textSize="25sp"
+
         android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.039"
@@ -202,6 +206,7 @@
         android:indeterminate="false"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
         app:layout_constraintTop_toBottomOf="@+id/toggleButton"
@@ -219,10 +224,12 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/xPProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
         app:layout_constraintTop_toBottomOf="@+id/toggleButton"
         app:layout_constraintVertical_bias="0.975" />
+
 
     <TextView
         android:id="@+id/textView5"
@@ -232,6 +239,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+
         android:text="Training XP"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"

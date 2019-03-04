@@ -2,8 +2,10 @@ package com.offerup.newtest;
 
 
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseUser;
@@ -70,6 +72,7 @@ import java.util.jar.Attributes;
 public class MemberActivity extends AppCompatActivity {
 
 
+
     private ToggleButton Membership;
     private String NUID;
     private CheckBox FightY, FightN;
@@ -122,6 +125,7 @@ public class MemberActivity extends AppCompatActivity {
 
         Height = findViewById(R.id.editTextHeight);
         Height.setError("Make sure to enter your height, i.e: 5'7");
+
 
 
         xpProgressBar = findViewById(R.id.xPProgressBar);
