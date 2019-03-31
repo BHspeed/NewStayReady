@@ -2,10 +2,12 @@ package com.offerup.newtest;
 
 
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -63,6 +65,7 @@ public class MemberActivity extends AppCompatActivity {
     private FirebaseStorage ImageData2;
     private StorageReference ImageData;
     private Button BoxingLessons, FitLessons, AddXP, PicButton;
+
     private ToggleButton Membership;
     private String NUID;
     private CheckBox FightY, FightN;
@@ -114,9 +117,6 @@ public class MemberActivity extends AppCompatActivity {
 
         Height = findViewById(R.id.editTextHeight);
         Height.setError("Make sure to enter your height, i.e: 5'7");
-
-
-
 
         xpProgressBar = findViewById(R.id.xPProgressBar);
         xpProgressBar.setMax(100);
