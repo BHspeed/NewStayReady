@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     public void openNewAcctActivity(){
         Intent intent = new Intent(this, NewAcctActivity.class);
         startActivity(intent);
-
+        finish();
 
     }
     public void openSignInActivity(){

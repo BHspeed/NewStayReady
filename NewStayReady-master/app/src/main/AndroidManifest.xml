@@ -17,14 +17,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MemberActivity">
 
         </activity>
+        <activity android:name=".YoutubeVideos"
+            android:parentActivityName=".MemberActivity">
+
+
+        </activity>
+
+        <activity android:name=".BoxingLessonsActivity"
+            android:parentActivityName=".MemberActivity">
+
+
+        </activity>
+
         <activity
             android:name=".SignInActivity"
             android:parentActivityName=".HomeActivity"
             />
         <activity android:name=".NewAcctActivity" />
+        <activity
+            android:name=".WorkoutActivity"
+            android:parentActivityName=".MemberActivity"
+            />
+
+
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
@@ -32,6 +51,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +63,7 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
+
         </service>
     </application>
 
