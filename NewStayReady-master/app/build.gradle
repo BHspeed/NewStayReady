@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        KrisJ
     }
     compileSdkVersion 27
     defaultConfig {
@@ -10,7 +11,7 @@ android {
         targetSdkVersion 27
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 9
+        versionCode 11
     }
     buildTypes {
         release {
@@ -36,5 +37,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.1'
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.android.support:support-v4:27.1.1'
 }
 apply plugin: 'com.google.gms.google-services'
