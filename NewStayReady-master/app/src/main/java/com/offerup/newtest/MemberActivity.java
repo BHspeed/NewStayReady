@@ -176,6 +176,7 @@ public class MemberActivity extends AppCompatActivity {
         });
 
 
+
         t1.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
             public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -487,39 +488,42 @@ public class MemberActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        ProfilePic.setImageBitmap(bitmap);
-        PicButton.setVisibility(findViewById(R.id.btnPic).INVISIBLE);
+        if(data!=null){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            ProfilePic.setImageBitmap(bitmap);
+            PicButton.setVisibility(findViewById(R.id.btnPic).INVISIBLE);
 
 
-        ImageData2 = FirebaseStorage.getInstance();
-        ImageData = ImageData2.getReference();
-        StorageReference uPic = ImageData.child(NUID);
-        StorageReference uuPic = uPic.child("Images/" + ProfilePic.toString());
+            ImageData2 = FirebaseStorage.getInstance();
+            ImageData = ImageData2.getReference();
+            StorageReference uPic = ImageData.child(NUID);
+            StorageReference uuPic = uPic.child("Images/" + ProfilePic.toString());
 
-        uPic.getName().equals(uuPic.getName());
-        uPic.getPath().equals(uuPic.getPath());
+            uPic.getName().equals(uuPic.getName());
+            uPic.getPath().equals(uuPic.getPath());
 
-        ProfilePic.setDrawingCacheEnabled(true);
-        ProfilePic.buildDrawingCache();
-        Bitmap bitpic = ((BitmapDrawable) ProfilePic.getDrawable()).getBitmap();
-        ByteArrayOutputStream OutPic = new ByteArrayOutputStream();
-        bitpic.compress(CompressFormat.JPEG, 100, OutPic);
-        byte[] dataPic = OutPic.toByteArray();
+            ProfilePic.setDrawingCacheEnabled(true);
+            ProfilePic.buildDrawingCache();
+            Bitmap bitpic = ((BitmapDrawable) ProfilePic.getDrawable()).getBitmap();
+            ByteArrayOutputStream OutPic = new ByteArrayOutputStream();
+            bitpic.compress(CompressFormat.JPEG, 100, OutPic);
+            byte[] dataPic = OutPic.toByteArray();
 
-        UploadTask uploadTask = uPic.putBytes(dataPic);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                taskSnapshot.getMetadata();
-                Toast.makeText(MemberActivity.this, "Uploading Profile Photo", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MemberActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
-            }
-        });
+            UploadTask uploadTask = uPic.putBytes(dataPic);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getMetadata();
+                    Toast.makeText(MemberActivity.this, "Uploading Profile Photo", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MemberActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
 
     }
